@@ -1,0 +1,3 @@
+psutil==5.8.0
+pywinusb==0.4.0
+tabulate==0.8.9
