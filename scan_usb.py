@@ -45,7 +45,7 @@ def obter_dispositivos_usb_linux():
         return dispositivos
 
     except Exception as e:
-        print(f"Erro ao obter dispositivos USB no Linux: {e}")
+        showMessage(f"=-= [!] Erro ao obter dispositivos USB no Linux: {e}", Cores.VERMELHO)
         return []
 
 def obter_dispositivos_usb_windows():
@@ -67,7 +67,7 @@ def obter_dispositivos_usb_windows():
         return dispositivos_info
 
     except Exception as e:
-        print(f"Erro ao obter dispositivos USB no Windows: {e}")
+        showMessage(f"=-= [!] Erro ao obter dispositivos USB no Windows: {e}", Cores.VERMELHO)
         return []
 
 def obter_informacoes_armazenamento():
@@ -90,14 +90,14 @@ def obter_informacoes_armazenamento():
                 informacoes["Disponível"] = formatar_tamanho(espaco.free)
                 informacoes["Percentual Usado"] = f"{espaco.percent}%"
             except Exception as e:
-                print(f"Erro ao obter informações de espaço de armazenamento: {e}")
+                showMessage(f"=-= [!] Erro ao obter informações de espaço de armazenamento: {e}", Cores.VERMELHO)
 
             informacoes_armazenamento.append(informacoes)
 
         return informacoes_armazenamento
 
     except Exception as e:
-        print(f"Erro ao obter informações de espaço de armazenamento: {e}")
+        showMessage(f"=-= [!] Erro ao obter informações de espaço de armazenamento: {e}", Cores.VERMELHO)
         return []
     
 def scan_dispositivos_usb_e_armazenamento():
@@ -106,18 +106,18 @@ def scan_dispositivos_usb_e_armazenamento():
     if dispositivos_usb:
         # Converte a lista de dicionários em uma tabela formatada
         tabela_formatada_dispositivos_usb = tabulate(dispositivos_usb, headers="keys", tablefmt="fancy_grid")
-        print("Dispositivos USB conectados:")
-        print(tabela_formatada_dispositivos_usb)
+        showMessage("=-= [@} Dispositivos USB conectados:", Cores.CIANO)
+        showMessage(tabela_formatada_dispositivos_usb, Cores.CIANO)
     else:
-        print("Nenhum dispositivo USB encontrado.")
+        showMessage("=-= [!] Nenhum dispositivo USB encontrado.", Cores.VERMELHO)
 
     if informacoes_armazenamento:
         # Converte a lista de dicionários em uma tabela formatada
         tabela_formatada_armazenamento = tabulate(informacoes_armazenamento, headers="keys", tablefmt="fancy_grid")
-        print("\nInformações de armazenamento:")
-        print(tabela_formatada_armazenamento)
+        showMessage("\n=-= [@} Informações de armazenamento:", Cores.CIANO)
+        showMessage(tabela_formatada_armazenamento, Cores.CIANO)
     else:
-        print("Nenhuma informação de armazenamento disponível.")
+        showMessage("=-= [!] Nenhuma informação de armazenamento disponível.", Cores.VERMELHO)
 
 if __name__ == "__main__":
     scan_dispositivos_usb_e_armazenamento()
